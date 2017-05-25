@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form action="http://192.168.130.149:8080/mytribe_game/create/create.do" method="post">
+		<table>
+			<thead align="center">create</thead>
+			<tbody>
+			<tr><td>accountName(varchar 50)</td><td><input type="text" name="accountName" value="" /></td></tr>
+			<tr><td>nickName(varchar 50)</td><td><input type="text" name="nickName" value="" /></td></tr>
+			<tr><td>platformType(int)</td><td><input type="text" name="platformType" value="" /></td></tr>
+			<tr><td>passwd(varchar 50)</td><td> <input type="text" name="passwd" value="" /></td></tr>
+			<tr><td>localeKey(byte)</td><td> <input type="text" name="localeKey" value="" /></td></tr>
+			<tr><td>userKey(varchar  255)</td><td> <input type="text" name="userKey" value="" /></td></tr>
+			<tr><td></td><td> <input type="submit" value="提交" /></td></tr>
+			</tbody>
+		</table>
+	</form>
+	
+	<form action="http://192.168.130.149:8080/mytribe_game/login/login.do" method="post">
+		<table>
+			<thead align="center">login</thead>
+			<tbody>
+			<tr><td>accountName(varchar 50)</td><td><input type="text" name="accountName" value="" /></td></tr>
+			<tr><td>platformType(int)</td><td><input type="text" name="platformType" value="" /></td></tr>
+			<tr><td>passwd(varchar 50)</td><td> <input type="text" name="passwd" value="" /></td></tr>
+			<tr><td>userKey(varchar  255)</td><td> <input type="text" name="userKey" value="" /></td></tr>
+			<tr><td></td><td> <input type="submit" value="提交" /></td></tr>
+			</tbody>
+		</table>
+	</form>
+</body>
+</html>

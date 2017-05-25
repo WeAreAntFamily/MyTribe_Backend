@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="false">
+	
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<param name="Threshold" value="ALL" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d][%p,%c{1}] %m%n" />
+		</layout>
+	</appender>
+	<appender name="FileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/console/console.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd-HH'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncFileAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="FileAppender" />
+	</appender>
+	
+	<!-- 线程监控log -->
+	<appender name="FrameThreadAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File"
+			value="/logsGame/thread/frame_thread_monitor.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncFrameThreadAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="FrameThreadAppender" />
+	</appender>
+	
+	<appender name="DBThreadAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/thread/db_thread_monitor.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncDBThreadAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="DBThreadAppender" />
+	</appender>
+	
+	<appender name="FrameRateAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/thread/frame_rate_stat.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncFrameRateAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="FrameRateAppender" />
+	</appender>
+	
+	<appender name="ThroughputAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File"
+			value="/logsGame/thread/throughput.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncThroughputAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="ThroughputAppender" />
+	</appender>
+	
+	<!-- 统计log -->
+	<appender name="PFAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/pf/PF.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncPFAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="PFAppender" />
+	</appender>
+	
+	<!-- 关服log -->
+	<appender name="ShutDownAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/server/shutdown.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncShutDownAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="ShutDownAppender" />
+	</appender>
+	
+	<appender name="SessionCloseAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/session/close.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncSessionCloseAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="SessionCloseAppender" />
+	</appender>
+	
+	<appender name="SpecialErrorAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/special/error.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncSpecialErrorAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="SpecialErrorAppender" />
+	</appender>
+	
+	<!-- 物品log -->
+	<appender name="ItemAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/item/item.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd-HH'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncItemAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="ItemAppender" />
+	</appender>
+	
+	
+	<!-- 个人信息log -->
+	<appender name="InfoAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/info/info.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd-HH'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncInfoAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="InfoAppender" />
+	</appender>
+	
+	<!-- 照片 log -->
+	<appender name="PhotoAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/photo/photo.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd-HH'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncPhotoAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="PhotoAppender" />
+	</appender>
+	
+	<!-- 唱歌log -->
+	<appender name="SingAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/sing/sing.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd-HH'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncSingAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="SingAppender" />
+	</appender>
+	
+	<!-- 聊天 log -->
+	<appender name="ChatAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/chat/chat.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd-HH'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncChatAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="ChatAppender" />
+	</appender>
+	
+	<!-- 任务 log -->
+	<appender name="QuestAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/quest/quest.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd-HH'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncQuestAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="QuestAppender" />
+	</appender>
+	
+	<!-- buff log -->
+	<appender name="BuffAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/buff/buff.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd-HH'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncBuffAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="BuffAppender" />
+	</appender>
+	
+	<!-- 好友 -->
+	<appender name="FriendAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/friend/friend.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd-HH'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncFriendAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="FriendAppender" />
+	</appender>
+	
+	<!-- 商城 -->
+	<appender name="MallAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/mall/mall.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncMallAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="MallAppender" />
+	</appender>
+	
+	<!-- 剧场 -->
+	<appender name="ChapterAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/chapter/chapter.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncChapterAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="ChapterAppender" />
+	</appender>
+	
+	<!-- 日常签到  -->
+	<appender name="DailyTaskAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/dailytask/dailytask.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncDailyTaskAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="DailyTaskAppender" />
+	</appender>
+	<!-- 属性 -->
+	<appender name="PropertyAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/property/property.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncPropertyAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="PropertyAppender" />
+	</appender>
+	
+	<!-- 跳舞 -->
+	<appender name="DanceAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/dance/dance.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncDanceAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="DanceAppender" />
+	</appender>
+	
+	<!-- 邮件 -->
+	<appender name="MailAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/mail/mail.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncMailAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="MailAppender" />
+	</appender>
+	
+	<!-- 职业 -->
+	<appender name="CareerAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/career/career.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncCareerAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="CareerAppender" />
+	</appender>
+	
+	<!-- 调试 -->
+	<appender name="DebugAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/debug/debug.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd-HH'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncDebugAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="DebugAppender" />
+	</appender>
+	
+	<!-- 抽奖 -->
+	<appender name="LotteryAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/lottery/lottery.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd-HH'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncLotteryAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="LotteryAppender" />
+	</appender>
+	
+	<!-- 升级礼包 -->
+	<appender name="LevelUpAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- 这里设置日志输出的绝对路径，如果设置相对路径，日志会生成在tomcat目录的相对路径里 -->
+		<param name="File" value="/logsGame/levelup/levelup.log" />
+		<param name="Threshold" value="ALL" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS} %p][%c]%m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="AsyncLevelUpAppender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="LevelUpAppender" />
+	</appender>
+	
+	<logger name="org.springframework">
+		<level value="error" />
+	</logger>
+	<logger name="org.apache">
+		<level value="error" />
+	</logger>
+	<logger name="java.sql">
+		<level value="error" />
+	</logger>
+	<logger name="org.quartz">
+		<level value="error" />
+	</logger>
+	<logger name="com.ibatis">
+		<level value="error" />
+	</logger>
+	<logger name="org.apache.commons.httpclient">
+		<level value="info" />
+	</logger>
+	<logger name="httpclient.wire.header">
+		<level value="info" />
+	</logger>
+	<logger name="httpclient.wire.content">
+		<level value="info" />
+	</logger>
+	<!-- 设置运营需要的日志 -->
+	<logger name="com.dance.dist.common.log.LoggerProvider$DailyTaskLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncDailyTaskAppender" />
+	</logger>
+	<logger name="com.dance.dist.common.log.LoggerProvider$ChapterLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncChapterAppender" />
+	</logger>
+	<logger name="com.dance.dist.common.log.LoggerProvider$FrameRateStatLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncFrameRateAppender" />
+	</logger>
+	<logger name="com.dance.dist.common.log.LoggerProvider$FrameLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncFrameThreadAppender" />
+	</logger>
+	<logger name="com.dance.dist.common.log.LoggerProvider$DBLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncDBThreadAppender" />
+	</logger>
+	<logger name="com.dance.dist.common.log.LoggerProvider$PlatFormLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncPFAppender" />
+	</logger>
+	<logger name="com.dance.dist.common.log.LoggerProvider$ServerShutDownLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncShutDownAppender" />
+	</logger>
+	<logger name="com.dance.dist.common.log.LoggerProvider$SessionCloseLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncSessionCloseAppender" />
+	</logger>
+	<logger name="com.dance.dist.common.log.LoggerProvider$SpecialErrorLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncSpecialErrorAppender" />
+	</logger>
+	<logger name="com.dance.dist.common.log.LoggerProvider$ThroughputLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncThroughputAppender" />
+	</logger>
+	<logger name="com.dance.dist.common.log.LoggerProvider$ItemLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncItemAppender" />
+	</logger>
+	<!-- 商城 -->
+	<logger name="com.dance.dist.common.log.LoggerProvider$MallLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncMallAppender" />
+	</logger>
+	<!-- 属性 -->
+	<logger name="com.dance.dist.common.log.LoggerProvider$PropertyLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncPropertyAppender" />
+	</logger>
+	<!-- 属性 -->
+	<logger name="com.dance.dist.common.log.LoggerProvider$DanceLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncDanceAppender" />
+	</logger>
+	<logger name="com.dance.dist.common.log.LoggerProvider$MailLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncMailAppender" />
+	</logger>
+	<logger name="com.dance.dist.common.log.LoggerProvider$CareerLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncCareerAppender" />
+	</logger>
+	<!-- 个人信息 -->
+	<logger name="com.dance.dist.common.log.LoggerProvider$InfoLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncInfoAppender" />
+	</logger>
+	<!-- 个人信息 照片 -->
+	<logger name="com.dance.dist.common.log.LoggerProvider$PhotoLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncPhotoAppender" />
+	</logger>
+	<!-- 唱歌 -->
+	<logger name="com.dance.dist.common.log.LoggerProvider$SingLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncSingAppender" />
+	</logger>
+	<!-- 聊天 -->
+	<logger name="com.dance.dist.common.log.LoggerProvider$ChatLog" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="AsyncChatAppender" />
+	</logger>
+	<!-- 任务 -->
+	<logger name="com.dance.dist.common.log.LoggerProvider$QuestLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncQuestAppender" />
+	</logger>
+	<!-- buff -->
+	<logger name="com.dance.dist.common.log.LoggerProvider$BuffLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncBuffAppender" />
+	</logger>
+	<!-- 好友 -->
+	<logger name="com.dance.dist.common.log.LoggerProvider$FriendLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncFriendAppender" />
+	</logger>
+	<!-- 调试 -->
+	<logger name="com.dance.dist.common.log.LoggerProvider$DebugLog" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="AsyncDebugAppender" />
+	</logger>
+	<!-- 抽奖 -->
+	<logger name="com.dance.dist.common.log.LoggerProvider$LotteryLog" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="AsyncLotteryAppender" />
+	</logger>
+	<!-- 升级礼包 -->
+	<logger name="com.dance.dist.common.log.LoggerProvider$LevelUpLog" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="AsyncLevelUpAppender" />
+	</logger>
+	<logger name="com.FirstListener" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="AsyncLevelUpAppender" />
+	</logger>
+	<logger name="com.zpark.action.TestAction" additivity="false">
+		<level value="info" />
+		<appender-ref ref="AsyncLevelUpAppender" />
+	</logger>
+	<!-- logger 日志输出设置开始,root的日志等级设置成了error,需要输出日志的请自行设置等级 -->
+	<root>
+		<level value="info" />
+		<!-- 注:部署时,只用 FileAppender 开发时只用Console -->
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="AsyncFileAppender" />
+	</root>
+</log4j:configuration>
